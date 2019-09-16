@@ -142,12 +142,27 @@ app.listen(app.get('port'), function() {
 
 
 app.get('/', function (req, res) {
-    res.render('index');//, {locals: {title: 'Welcome!'}});
-    //res.sendfile(__dirname + '/aranoz/index.html');
-  });
+  res.redirect('/index');
+});
 
   app.get('/index', function (req, res) {
-    res.render('index');//, {locals: {title: 'Welcome!'}});
+    res.render('index', {locals: {title: 'Welcome!',
+  banners: [
+    { 
+      dt: '1', 
+    },
+    { 
+      dt: '2', 
+    },
+    { 
+      dt: '3', 
+    },
+    { 
+      dt: '4', 
+    }
+    
+  ]
+  }});
     //res.sendfile(__dirname + '/aranoz/index.html');
   });
 
