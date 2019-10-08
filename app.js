@@ -16,7 +16,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const es6Renderer = require('express-es6-template-engine');
 
-//var {mongoose} = require('./server/db/mongoose.js');
+//Connecting to database
+var {mongoose} = require('./server/mongoose.js');
 
 /*
     View Engine
@@ -114,7 +115,9 @@ app.use('/app', (req, res, next) => {
 /*
     Website routes
 */
-// var login = require('./routes/login');
+ var addressRoutes = require('./routes/address.routes');
+ var pgRoute = require('./routes/pg.routes');
+
 // var users = require('./routes/users');
 // var appRoute = require('./routes/app');
 // var patients = require('./routes/patients');
@@ -122,8 +125,8 @@ app.use('/app', (req, res, next) => {
 // var diseases = require('./routes/diseases');
 // var rooms = require('./routes/rooms');
 
-// app.use('/', login);
-// app.use('/', appRoute);
+ app.use('/', addressRoutes);
+ app.use('/', pgRoute);
 // app.use('/', users);
 // app.use('/', patients);
 // app.use('/', settings);
@@ -211,4 +214,9 @@ app.get('/checkout', function (req, res) {
 
   app.get('/tracking', function (req, res) {
     res.render('tracking');//, {locals: {title: 'Welcome!'}});
+  });
+
+
+  app.get('/admin/index', function (req, res) {
+    res.render('admin/pages/tables/basic-table');//, {locals: {title: 'Welcome!'}});
   });
